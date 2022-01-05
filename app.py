@@ -22,8 +22,9 @@ def index_request() -> jsonify:
 @app.route('/generate', methods=["POST"])
 def generate_request() -> jsonify:
     if Generate(request.get_json()).check():
-        return Story().get()
+        return jsonify({"body": Story().get()})
+    else: return None, 400
     
-    
+
 if __name__ == '__main__': 
     app.run(debug=True)
